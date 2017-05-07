@@ -1,0 +1,32 @@
+<template name="UserList">
+    <div>
+        <table border="1">
+            {{#if UserList}}
+                <tr>
+                    <th>User</th>
+                    <th>Avg Rating</th>
+                </tr>
+                {{#each UserList}}
+                    {{#if $eq currentUser._id _id }}
+                        {{#if avgrating}}
+                            <tr class="logged-in-user">
+                                <td colspan="2">Your average rating is: {{ avgrating }}</td>
+                            </tr>
+                        {{/if}}
+                    {{/if}}
+                    {{#if $neq currentUser._id _id}}
+                        <tr>  
+                            {{#each emails}}
+                                <td>{{ address }}</td>
+                            {{/each}}
+                            <td>
+                                <input type="text" class="userrating" placeholder="Rate here..." value= {{ avgrating }} />
+                                <button class="btn" userid= {{_id}} title="Rate to user">R</button>
+                            </td>
+                        </tr>
+                    {{/if}}
+                {{/each}}
+              {{/if}}
+        </table>
+    </div>
+</template>
